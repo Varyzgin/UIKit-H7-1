@@ -16,7 +16,6 @@ class DetailsViewController: UIViewController {
     }
     lazy var contentView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .white
         $0.addSubviews(imageView, stackView, descriptionLabel)
         return $0
     }(UIView())
@@ -44,6 +43,7 @@ class DetailsViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
 //        $0.alwaysBounceVertical = true // для того чтобы убрать отступ сверху
         $0.contentInsetAdjustmentBehavior = .never
+        $0.backgroundColor = .white
         $0.addSubview(contentView)
         return $0
     }(UIScrollView())

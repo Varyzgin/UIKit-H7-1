@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     lazy var tableView = {
         $0.dataSource = self // !!
         $0.register(CardCellView.self, forCellReuseIdentifier: CardCellView.identifier) // !!
+        $0.delegate = self
         $0.separatorStyle = .none
         return $0
     }(UITableView(frame: view.frame, style: .plain))
