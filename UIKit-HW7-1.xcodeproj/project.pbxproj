@@ -15,7 +15,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				Style/Images.swift,
+				Style/Image.swift,
 			);
 			target = 32B444352D019D0D00A94A27 /* UIKit-HW7-1 */;
 		};
@@ -26,7 +26,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = 32B444342D019D0D00A94A27 /* Resources */;
 			membershipExceptions = (
-				Style/Images.swift,
+				Style/Image.swift,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */

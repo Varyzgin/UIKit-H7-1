@@ -7,6 +7,18 @@
 
 import UIKit
 
+enum Margins {
+    case small, medium, large
+
+    func value() -> CGFloat {
+        switch self {
+        case .small: return 1/2 * 20 * scaleMultiplier()
+        case .medium: return 2/3 * 20 * scaleMultiplier()
+        case .large: return 20 * scaleMultiplier()
+        }
+    }
+}
+
 func scaleMultiplier() -> CGFloat {
     let deviceModel = UIDevice.current.userInterfaceIdiom
     let screenHeight = UIScreen.main.bounds.height

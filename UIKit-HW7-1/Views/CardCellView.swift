@@ -22,13 +22,12 @@ class CardCellView: UITableViewCell {
         return $0
     }(UIView())
     
-    func setupCell(cardContent: CardContent) {
-        posterImageView.image = UIImage(named: cardContent.posterImage)
-        authorTextLabel.text = cardContent.authorText
-        descriptionTextLabel.text = cardContent.postText
-        
-        let pictureNames = [cardContent.leftImage, cardContent.centerImage, cardContent.rightImage]
-        pictureNames.forEach {
+    func setupCell(content: Content) {
+        posterImageView.image = UIImage(named: content.posterImage)
+        authorTextLabel.text = content.authorText
+        descriptionTextLabel.text = content.previewText
+
+        content.imagesStack.forEach {
             if let image = UIImage(named: $0) {
                 let imageView = UIImageView(image: image)
                 imageView.layer.cornerRadius = 15
@@ -36,23 +35,7 @@ class CardCellView: UITableViewCell {
                 stackView.addArrangedSubview(imageView)
             }
         }
-        
         setupConstraints()
-    }
-
-    enum Margins {
-        case small, medium, large
-
-        func value() -> CGFloat {
-            switch self {
-            case .small:
-                return 1/2 * 20 * scaleMultiplier()
-            case .medium:
-                return 2/3 * 20 * scaleMultiplier()
-            case .large:
-                return 20 * scaleMultiplier()
-            }
-        }
     }
     
     lazy var posterImageView = {
@@ -64,8 +47,8 @@ class CardCellView: UITableViewCell {
         return $0
     }(UIImageView())
 
-    lazy var authorTextLabel = setupLabel(textStyle: .megaHeader, textColor: .white, numberOfLines: 3)
-    lazy var descriptionTextLabel = setupLabel(textStyle: .subDescription, textColor: .white, numberOfLines: 3)
+    lazy var authorTextLabel = setupLabel(textStyle: .megaHeader, textColor: .white)
+    lazy var descriptionTextLabel = setupLabel(textStyle: .subDescription, textColor: .white)
     lazy var stackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .horizontal
@@ -113,9 +96,8 @@ class CardCellView: UITableViewCell {
             detailsButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: Margins.large.value()),
             detailsButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: Margins.large.value()),
             detailsButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -Margins.large.value()),
-            detailsButton.heightAnchor.constraint(equalToConstant: 44),
+            detailsButton.heightAnchor.constraint(equalToConstant: 2 * Margins.large.value()),
             detailsButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -Margins.large.value()),
-            
         ])
     }
 

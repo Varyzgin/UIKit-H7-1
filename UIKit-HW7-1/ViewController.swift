@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let cardContent : [CardContent] = CardContent.getImages()
+    let content : [Content] = Content.getContent()
     lazy var tableView = {
         $0.dataSource = self // !!
         $0.register(CardCellView.self, forCellReuseIdentifier: CardCellView.identifier) // !!
@@ -23,17 +23,22 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController : UITableViewDataSource {
+extension ViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { // !!
-        cardContent.count
+        content.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { // !!
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCellView.identifier, for: indexPath) as? CardCellView // !!
         else { return UITableViewCell() }
         
-        cell.setupCell(cardContent: cardContent[indexPath.row]) // !!
+        cell.setupCell(content: content[indexPath.row]) // !!
         cell.selectionStyle = .none
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailsViewController()
+        vc.setupPage(content: content[indexPath.row])
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
